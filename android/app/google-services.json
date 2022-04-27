@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "960759292266",
+    "project_id": "artrquiz",
+    "storage_bucket": "artrquiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960759292266:android:1cab223e587a26971ec513",
+        "android_client_info": {
+          "package_name": "com.quizapps.langquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960759292266-rintjqdiqh3n2omgirt2mlti53g3ju5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBavDppBjG3QLJTONjN9IIyxd-EMWylGgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960759292266-rintjqdiqh3n2omgirt2mlti53g3ju5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
