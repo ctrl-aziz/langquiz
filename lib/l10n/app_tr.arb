@@ -9,7 +9,7 @@
     "intermediate_level": "Orta seviye",
     "above_Intermediate": "Orta seviye üstü",
     "further": "İleri",
-    "terminate": "Sonlandır",
+    "terminate": "Topla",
     "next": "Sonra",
     "choose_quiz_level": "İstediğin seviyeyi seçip egzersizler başla",
     "success_rate": "Başarı oranı",
@@ -37,6 +37,8 @@
     "what_mean": "ne demektir",
     "learn_more": "daha_fazla_oğren",
     "no_more": "Tebrikler: Kelimeler bitti, yakında yeni kalimeler eklenecek",
-    "language": "Dil"
-
+    "language": "Dil",
+    "more_chance": "Bir şans daha?",
+    "watch_video_to_try_again": "video izle ve bir daha dene",
+    "watch": "izle"
 }

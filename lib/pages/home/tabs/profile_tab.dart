@@ -65,7 +65,7 @@ class ProfileTab extends StatelessWidget {
                   );
                 }
                 return CustomText(
-                  text: "${translate.earned_words}: ${snapshot.data}",
+                  text: "${translate.earned_words}: ${snapshot.data??0}",
                   lang: Provider.of<MainProvider>(context).locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
                 );
               },

@@ -94,7 +94,7 @@ class QuizQuestionsPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomText(
-                          text: "${pageIndex+1}/20 ",
+                          text: "${pageIndex+1}/${provider.quiz.length} ",
                           lang: provider.locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[700],

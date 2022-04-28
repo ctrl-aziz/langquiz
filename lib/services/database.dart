@@ -92,7 +92,7 @@ class Database{
     return _wordCollection
         .where(WordModel.LEVEL, isEqualTo: level)
         .orderBy('${WordModel.QUIZZED_USERS}.users', descending: true)
-        .limit(12)
+        .limit(10)
         .snapshots()
         .map(_wordsFromSnapshot);
   }

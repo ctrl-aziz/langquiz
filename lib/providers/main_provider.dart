@@ -366,6 +366,10 @@ class MainProvider extends ChangeNotifier{
             _errorsCount = 0;
             _maxErrorsCount = 3;
           },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.green),
+            foregroundColor: MaterialStateProperty.all(Colors.white),
+          ),
           child: CustomText(
             text: translate.terminate,
             lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
@@ -380,7 +384,7 @@ class MainProvider extends ChangeNotifier{
     return AlertDialog(
       title: Center(
         child: CustomText(
-          text: "هل تريد المتابعة؟",
+          text: translate.more_chance,
           lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
         ),
       ),
@@ -388,22 +392,30 @@ class MainProvider extends ChangeNotifier{
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomText(
-            text: "شاهد فيديو لإضافة محاول اخرى",
+            text: translate.watch_video_to_try_again,
             lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
           ),
         ],
       ),
       actionsAlignment: MainAxisAlignment.center,
       actions: [
-        Provider.of<AdsProvider>(dialogContext).isAdLoading?
-        const CircularProgressIndicator():TextButton(
-          onPressed: ()async{
-            Provider.of<AdsProvider>(dialogContext, listen: false).getAd(dialogContext);
-            // Navigator.of(dialogContext).pop();
-          },
-          child: CustomText(
-            text: "مشاهدة",
-            lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
+        SizedBox(
+          width: 70,
+          child: TextButton(
+            onPressed: Provider.of<AdsProvider>(dialogContext).isAdLoading?
+            null:()async{
+              Provider.of<AdsProvider>(dialogContext, listen: false).getAd(dialogContext);
+              // Navigator.of(dialogContext).pop();
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+              foregroundColor: MaterialStateProperty.all(Colors.white),
+            ),
+            child: Provider.of<AdsProvider>(dialogContext).isAdLoading?
+            const LinearProgressIndicator(color: Colors.white,):CustomText(
+              text: translate.watch,
+              lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
+            ),
           ),
         ),
         TextButton(
@@ -416,8 +428,12 @@ class MainProvider extends ChangeNotifier{
             _errorsCount = 0;
             _maxErrorsCount = 3;
           },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.red),
+            foregroundColor: MaterialStateProperty.all(Colors.white),
+          ),
           child: CustomText(
-            text: translate.terminate,
+            text: translate.end,
             lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
           ),
         ),
@@ -458,6 +474,10 @@ class MainProvider extends ChangeNotifier{
           actions: [
             TextButton(
               onPressed: ()=> Navigator.of(context).pop(false),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+              ),
               child: CustomText(
                 text: translate.no,
                 lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,
@@ -472,6 +492,10 @@ class MainProvider extends ChangeNotifier{
                 _errorsCount = 0;
                 _maxErrorsCount = 3;
               },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+              ),
               child: CustomText(
                 text: translate.yes,
                 lang: _locale!.languageCode == 'ar' ? Lang.ar : Lang.tr,

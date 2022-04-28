@@ -9,7 +9,7 @@
     "intermediate_level": "مستوى متوسط",
     "above_Intermediate": "أعلى من المتوسط",
     "further": "متقدم",
-    "terminate": "إنهاء",
+    "terminate": "إجمع",
     "next": "التالي",
     "choose_quiz_level": "إختر المستوى وابدأ الاختبار",
     "success_rate": "التقدم",
@@ -37,5 +37,8 @@
     "what_mean": "ما معنى كلمة",
     "learn_more": "تعلم المزيد",
     "no_more": "لقد نفدت الكلمات, سيتم إضافة المزيد من الكلمات قريباً",
-    "language": "اللغة"
+    "language": "اللغة",
+    "more_chance": "محاولة اخرى؟",
+    "watch_video_to_try_again": "شاهد فيديو لإضافة محاول اخرى",
+    "watch": "مشاهدة"
 }
