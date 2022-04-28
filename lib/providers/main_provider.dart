@@ -171,10 +171,12 @@ class MainProvider extends ChangeNotifier{
 
   /// ******** Learning functions start ********
   void getLearningWords(BuildContext context) async{
+    print("getLearningWords");
     assert(level != null, "Level must not be null");
     _words = await Database
         .level(level, _firebaseUser!.uid, context)
         .allLearningWords;
+    print("getLearningWords 2 ${_words.length}");
     notifyListeners();
   }
 
@@ -256,9 +258,10 @@ class MainProvider extends ChangeNotifier{
   }
 
   /// ******** Quiz functions start ********
-  void getQuiz(BuildContext context){
+  Future<void> getQuiz(BuildContext context) async {
     assert(level != null, "Level must not be null");
-    Database.level(level, _firebaseUser!.uid, context).allWords.listen((words) {
+    Stream<List<WordModel>> _data = await Database.level(level, _firebaseUser!.uid, context).allWords;
+    _data.listen((words) {
       _quiz = _convertWordsToQuiz(words);
       _quiz.shuffle();
       notifyListeners();

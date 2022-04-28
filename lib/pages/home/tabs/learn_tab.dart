@@ -36,6 +36,7 @@ class LearnTab extends StatelessWidget {
                   return CustomButton(
                     onPressed: (){
                       provider.level = provider.levels[i];
+                      print(provider.level);
                       provider.getLearningWords(context);
                       CustomNavigator.push(context, LearningPage(provider.levelsName(context)[provider.levels[i]]!));
                     },

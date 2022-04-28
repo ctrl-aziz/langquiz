@@ -5,9 +5,11 @@ class WordModel {
       TURKISH = "turkish", TURKISH_DESC = "turkish_desc",
       LEVEL = "level", CREATED_AT = "created_at",
       LEARNED_USERS = "learned_users", ID = "id",
-      QUIZZED_USERS = "quizzed_users", USERS = "users";
+      QUIZZED_USERS = "quizzed_users", USERS = "users",
+      COUNT = "count";
 
   String? id;
+  int? count;
   String? arabic;
   String? arabicDesc;
   String? turkish;
@@ -20,6 +22,7 @@ class WordModel {
 
   WordModel({
     required this.id,
+    required this.count,
     required this.arabic,
     required this.arabicDesc,
     required this.turkish,
@@ -45,6 +48,7 @@ class WordModel {
 
   WordModel.fromSnapshot(DocumentSnapshot snapshot){
     id = snapshot.id;
+    count = snapshot.get(COUNT);
     arabic = snapshot.get(ARABIC);
     arabicDesc = snapshot.get(ARABIC_DESC);
     turkish = snapshot.get(TURKISH);

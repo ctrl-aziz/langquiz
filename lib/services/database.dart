@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:langquiz/models/user_model.dart';
 import 'package:langquiz/models/word_model.dart';
 import 'package:langquiz/providers/main_provider.dart';
@@ -9,6 +11,7 @@ import 'package:provider/provider.dart';
 class Database{
   final _userCollection = FirebaseFirestore.instance.collection("Users");
   final _wordCollection = FirebaseFirestore.instance.collection("Words");
+  final Random _ran = Random();
 
   String? id;
 
@@ -87,20 +90,28 @@ class Database{
     }
   }
 
-  Stream<List<WordModel>> get allWords{
+  Future<Stream<List<WordModel>>> get allWords async{
     assert(level != null && id != null, "Level and user id must not be null user Database.level() constructor");
+    int _count = await getLastDocCount(level!);
+    int? _ranCount = _count == 0 ? null : _ran.nextInt(_count);
     return _wordCollection
         .where(WordModel.LEVEL, isEqualTo: level)
-        .orderBy('${WordModel.QUIZZED_USERS}.users', descending: true)
+        .where(WordModel.COUNT, isGreaterThanOrEqualTo: _ranCount??0)
+        // .orderBy('${WordModel.QUIZZED_USERS}.users', descending: true)
         .limit(10)
         .snapshots()
         .map(_wordsFromSnapshot);
   }
+
   Future<List<WordModel>> get allLearningWords async{
     assert(level != null && id != null, "Level and user id must not be null user Database.level() constructor");
+    int _count = await getLastDocCount(level!);
+    int? _ranCount = _count == 0 ? null : _ran.nextInt(_count);
+
     var data = await _wordCollection
         .where(WordModel.LEVEL, isEqualTo: level)
-        .orderBy('${WordModel.LEARNED_USERS}.users', descending: false)
+        .where(WordModel.COUNT, isGreaterThanOrEqualTo: _ranCount??0)
+        // .orderBy(WordModel.COUNT, descending: true)
         .limit(12)
         .get();
     if(data.docs.isNotEmpty) {
@@ -110,11 +121,12 @@ class Database{
   }
   Future<List<WordModel>> get allLearningWordsMore async{
     var _lastDoc = Provider.of<MainProvider>(context!, listen: false).lastDoc;
-    assert(level != null && _lastDoc != null, "Level and _lastDoc must not be null user Database.level() constructor");
+    if(_lastDoc == null) return [];
+    assert(level != null, "Level and _lastDoc must not be null user Database.level() constructor");
     var data = await _wordCollection
         .where(WordModel.LEVEL, isEqualTo: level)
-        .orderBy('${WordModel.LEARNED_USERS}.users', descending: false)
-        .startAfterDocument(_lastDoc!)
+        .orderBy(WordModel.CREATED_AT, descending: true)
+        .startAfterDocument(_lastDoc)
         .limit(12)
         .get();
     return _wordsFromSnapshot(data);
@@ -176,6 +188,19 @@ class Database{
         print("updateUserData Error: $e");
       }
       rethrow;
+    }
+  }
+
+  Future getLastDocCount(String level) async{
+    try{
+      return _wordsFromSnapshot((await _wordCollection
+          .where(WordModel.LEVEL, isEqualTo: level)
+          .orderBy(WordModel.COUNT, descending: true)
+          .limit(1)
+          .get())).first.count;
+    }catch(e){
+      print("getLastDocCount Error");
+      return 0;
     }
   }
 }

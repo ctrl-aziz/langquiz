@@ -34,9 +34,9 @@ class QuizTab extends StatelessWidget {
                 itemCount: provider.levels.length,
                 itemBuilder: (context, i){
                   return CustomButton(
-                    onPressed: (){
+                    onPressed: () async{
                       provider.level = provider.levels[i];
-                      provider.getQuiz(context);
+                      await provider.getQuiz(context);
                       CustomNavigator.push(context,
                         QuizQuestionsPage(
                           "${provider.levels[i]} ${provider.levelsName(context)[provider.levels[i]]}",
